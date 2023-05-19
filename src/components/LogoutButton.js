@@ -1,9 +1,11 @@
-const Logout = (props) => {
+import "../styles/LogButton.css"
+
+const Logout = (prop) => {
     return (
-        <button
+        <button class = "log-button"
             type = "button"
             onClick = {() => {
-                props.setToken("");
+                prop.setToken("");
                 window.localStorage.removeItem("token");
             }}
         > Logout
