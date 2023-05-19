@@ -1,4 +1,4 @@
-import './App.css';
+import "./styles/App.css";
 
 import { useEffect, useState } from 'react';
 
@@ -23,9 +23,9 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
+    <div className = "App">
+      <header className = "App-header">
+        <p className = "App-title">
           communifyy
         </p>
         {

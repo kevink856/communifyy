@@ -2,7 +2,7 @@ import "../styles/LogButton.css"
 
 const Logout = (prop) => {
     return (
-        <button class = "log-button"
+        <button className = "Log-button"
             type = "button"
             onClick = {() => {
                 prop.setToken("");
