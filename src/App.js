@@ -1,45 +1,33 @@
+// Import dependencies
 import "./styles/App.css";
-
-import { useEffect, useState } from 'react';
+import { Routes, Route } from "react-router-dom";
 
 // Import components
 import LoginButton from "./components/LoginButton";
-import LogoutButton from "./components/LogoutButton";
+
+// Import pages
+import Home from "./Home";
 
 function App() {
-  const [token, setToken] = useState("");
-
-  useEffect(() => {
-    const hash = window.location.hash;
-    let token = window.localStorage.getItem("token");
-
-    if(!token && hash) {
-      token = hash.substring(1).split("&").find(e => e.startsWith("access_token")).split("=")[1];
-      window.location.hash = "";
-      window.localStorage.setItem("token", token);
-    }
-    setToken(token);
-
-  }, []);
-
-  return (
-    <div className = "App">
-      <header className = "App-header">
-        <p className = "App-title">
-          communifyy
-        </p>
-        {
-          !token
-          ? <div>
-              <LoginButton />
-            </div>
-          : <div>
-              <LogoutButton setToken={setToken} />
-            </div>
-        }
-      </header>
-    </div>
-  );
+    return (
+        <div className = "App">
+            <header className = "App-header">
+                <p className = "App-title">
+                    communifyy
+                </p>
+                <p>
+                    Landing Page - More info here
+                </p>
+                <div>
+                    <LoginButton />
+                </div>
+            </header>
+            <Routes>
+                <Route path = "/" element = {<App />} exact = {true}/>
+                <Route path = "/home" element = {<Home />}/>
+            </Routes>
+        </div>
+    );
 }
 
 export default App;
