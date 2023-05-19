@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/communifyy/static/css/main.c124b6f8.css",
+    "main.js": "/communifyy/static/js/main.a163bbcf.js",
+    "static/js/787.ba6c94a6.chunk.js": "/communifyy/static/js/787.ba6c94a6.chunk.js",
+    "index.html": "/communifyy/index.html",
+    "main.c124b6f8.css.map": "/communifyy/static/css/main.c124b6f8.css.map",
+    "main.a163bbcf.js.map": "/communifyy/static/js/main.a163bbcf.js.map",
+    "787.ba6c94a6.chunk.js.map": "/communifyy/static/js/787.ba6c94a6.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c124b6f8.css",
+    "static/js/main.a163bbcf.js"
+  ]
+}
