@@ -1,9 +1,9 @@
-const Logout = (setToken) => {
+const Logout = (props) => {
     return (
         <button
             type = "button"
             onClick = {() => {
-                setToken("");
+                props.setToken("");
                 window.localStorage.removeItem("token");
             }}
         > Logout

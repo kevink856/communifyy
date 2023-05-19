@@ -37,6 +37,9 @@ function App() {
               <LogoutButton setToken={setToken} />
             </div>
         }
+        <p>
+          Token is: { token }
+        </p>
       </header>
     </div>
   );
