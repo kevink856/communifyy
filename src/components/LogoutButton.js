@@ -1,7 +1,7 @@
 // Import dependencies
 import "../styles/LogButton.css"
-import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const Logout = (prop) => {
     return (

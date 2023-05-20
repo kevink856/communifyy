@@ -1,7 +1,6 @@
 // Import dependencies
 import "./styles/App.css";
 import { useEffect, useState } from 'react';
-import { Outlet } from "react-router-dom";
 
 // Import components
 import LogoutButton from "./components/LogoutButton";
@@ -35,7 +34,6 @@ function Home() {
                     <LogoutButton setToken={setToken} />
                 </div>
             </div>
-            <Outlet />
         </div>
     );
 }

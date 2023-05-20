@@ -1,6 +1,6 @@
 // Import dependencies
 import "./styles/App.css";
-import { Routes, Route } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 // Import components
 import LoginButton from "./components/LoginButton";
@@ -11,6 +11,13 @@ import Home from "./Home";
 function App() {
     return (
         <div className = "App">
+            <BrowserRouter>
+                <Routes>
+                    <Route path = "/" element = {<App />} />
+                    <Route path = "/home" element = {<Home />} />
+                </Routes>
+            </BrowserRouter>
+            { /* <Redirect to = "/" /> */ }
             <header className = "App-header">
                 <p className = "App-title">
                     communifyy
@@ -22,10 +29,6 @@ function App() {
                     <LoginButton />
                 </div>
             </header>
-            <Routes>
-                <Route path = "/" element = {<App />} exact = {true}/>
-                <Route path = "/home" element = {<Home />}/>
-            </Routes>
         </div>
     );
 }
