@@ -29,6 +29,9 @@ const Home = () => {
                 <p>
                     Will show info here once you're logged in!
                 </p>
+                <p>
+                    token: { token }
+                </p>
                 <div>
                     <LogoutButton setToken = {setToken} />
                 </div>

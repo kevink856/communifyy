@@ -1,21 +1,20 @@
 // Import dependencies
-import "./styles/App.css";
+import "../styles/LandingPage.css";
 
 // Import components
-import LoginButton from "./components/LoginButton";
+import LoginButton from "./LoginButton";
 
-const App = () => {
+const LandingPage = () => {
     return (
-        <div className = "App">
-            <header className = "App-header">
-                <p className = "App-title">
+        <div className = "LandingPage">
+            <header className = "LandingPage-header">
+                <p className = "LandingPage-title">
                     communifyy
                 </p>
                 <p>
                     Landing Page - More info here
                 </p>
                 <div>
-                    { window.localStorage.getItem("token") }
                     <LoginButton />
                 </div>
             </header>
@@ -23,4 +22,4 @@ const App = () => {
     );
 }
 
-export default App;
+export default LandingPage;

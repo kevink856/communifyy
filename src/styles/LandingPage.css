@@ -1,8 +1,8 @@
-.App {
+.LandingPage {
     text-align: center;
 }
 
-.App-header {
+.LandingPage-header {
     align-items: center;
     background-color: #282c34;
     color: rgb(209, 209, 209);
@@ -14,6 +14,6 @@
     min-height: 100vh;
 }
 
-.App-title {
+.LandingPage-title {
     font-size: calc(30px + 2vmin);
 }

@@ -5,14 +5,14 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 // Import pages
-import App from "./App";
+import LandingPage from "./components/LandingPage";
 import Home from "./components/Home";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <App />,
+        element: <LandingPage />,
     },
     {
         path: "/home",
