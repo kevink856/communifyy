@@ -1,19 +1,20 @@
 // Import dependencies
 import "../styles/LogButton.css"
-import { Button } from "@mui/material";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Logout = (prop) => {
+    const navigate = useNavigate();
+
     return (
-        <Button className = "Log-button"
-            component = {Link}
-            to = "../"
+        <button className = "Log-button"
+            type = "button"
             onClick = {() => {
                 prop.setToken("");
                 window.localStorage.removeItem("token");
+                navigate("/LandingPage");
             }}
         > Logout
-        </Button>
+        </button>
     );
 }
 
