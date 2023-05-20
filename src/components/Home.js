@@ -1,13 +1,28 @@
 // Import dependencies
 import "../styles/Home.css";
+import { useEffect, useState } from "react";
 
 // Import components
 import LogoutButton from "./LogoutButton";
 
-const Home = (prop) => {
+const Home = () => {
+    const [token, setToken] = useState("");
+
+    useEffect(() => {
+        const hash = window.location.hash;
+        let token = window.localStorage.getItem("token");
+
+        if(!token && hash) {
+            token = hash.substring(1).split("&").find(e => e.startsWith("access_token")).split("=")[1];
+            window.location.hash = "";
+            window.localStorage.setItem("token", token);
+        }
+        setToken(token);
+    }, [token]);
+
     return (
         <div className = "Home">
-            <div className = "Home-header">
+            <header className = "Home-header">
                 <p>
                     This is current home page
                 </p>
@@ -15,9 +30,9 @@ const Home = (prop) => {
                     Will show info here once you're logged in!
                 </p>
                 <div>
-                    <LogoutButton setToken = {prop.setToken} />
+                    <LogoutButton setToken = {setToken} />
                 </div>
-            </div>
+            </header>
         </div>
     );
 }

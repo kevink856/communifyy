@@ -4,7 +4,7 @@ import "../styles/LogButton.css"
 // Declare consts for Oauth link formatting
 const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize"
 const CLIENT_ID = "3f8575d48b8048139be97f96b54f41ad";
-const REDIRECT_URI = "https://kevink856.github.io/communifyy/home";
+const REDIRECT_URI = "https://kevink856.github.io/communifyy/#/home";
 const RESPONSE_TYPE = "token"
 
 const LoginButton = () => {
@@ -12,7 +12,7 @@ const LoginButton = () => {
         <button className = "Log-button"
             type = "button"
             onClick = {() => {
-                window.location.href = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`;
+                window.location.href = `${AUTH_ENDPOINT}?response_type=${RESPONSE_TYPE}&client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}`;
             }}
         > Login to Spotify
         </button>
