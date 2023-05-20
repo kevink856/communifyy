@@ -15,6 +15,7 @@ const App = () => {
                     Landing Page - More info here
                 </p>
                 <div>
+                    { window.localStorage.getItem("token") }
                     <LoginButton />
                 </div>
             </header>
