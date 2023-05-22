@@ -1,14 +1,9 @@
 // Import dependencies
 import "../styles/Home.css";
-import db from "../server/db/connect.js";
-import express from "express";
 import { useEffect, useState } from "react";
 
 // Import components
 import LogoutButton from "./LogoutButton";
-
-// Declare const for REST API
-const router = express.Router();
 
 /* 
  * Asynchronously fetch API call
@@ -48,9 +43,6 @@ const Home = () => {
 
     // Fetch necessary user info
     fetchData(token, { setUsername, setPfp, setId });
-    
-    // Store user info into database
-    postData({ id, username });
 
     return (
         <div className = "Home">
