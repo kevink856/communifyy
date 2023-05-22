@@ -1,7 +1,6 @@
 import express from "express";
 import cors from "cors";
-import posts from "./routes/posts.mjs";
-
+import top from "./routes/top.js";
 import "express-async-errors";
 
 const PORT = process.env.REACT_APP_PORT || 3000;
@@ -11,7 +10,7 @@ app.use(cors());
 app.use(express.json());
 
 // Load the /posts routes
-app.use("/posts", posts);
+app.use("/top", top);
 
 // Global error handling
 app.use((err, _req, res, next) => {

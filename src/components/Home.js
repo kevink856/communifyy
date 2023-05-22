@@ -5,20 +5,6 @@ import { useEffect, useState } from "react";
 // Import components
 import LogoutButton from "./LogoutButton";
 
-/* 
- * Asynchronously fetch API call
- * - Gets user's profile data
- */ 
-async function fetchData(token, props) {
-    const result = await fetch("https://api.spotify.com/v1/me", {
-        method: "GET", headers: { Authorization: `Bearer ${token}` }
-    });
-    const profile = await result.json();
-    props.setUsername(profile.display_name);
-    props.setPfp(profile.images[0].url);
-    props.setId(profile.id);
-}
-
 /*
  * Component that holds entire single-page application
  */
@@ -27,6 +13,8 @@ const Home = () => {
     const [username, setUsername] = useState("");
     const [pfp, setPfp] = useState("");
     const [id, setId] = useState("");
+    const [topsongs, setTopsongs] = useState("");
+    const [topartists, setTopartists] = useState("");
 
     // Run and parse token from URL whenever "token" changes
     useEffect(() => {
@@ -41,8 +29,40 @@ const Home = () => {
         setToken(token);
     }, [token]);
 
+    /* 
+     * Asynchronously fetch API call
+     * - Gets user's profile data
+     */ 
+    const fetchData = async () => {
+        const result = await fetch("https://api.spotify.com/v1/me", {
+            method: "GET", headers: { Authorization: `Bearer ${token}` }
+        });
+        const profile = await result.json();
+        setUsername(profile.display_name);
+        setPfp(profile.images[0].url);
+        setId(profile.id);
+    }
+
+    const postTop = async () => {
+        await fetch(`${process.env.REACT_APP_BASE_URL}/topsongs`, {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify({
+                id, topsongs: topsongs.split(","), topartists: topartists.split(",")
+            })
+        }).then(resp => resp.json());
+        setId("");
+        setTopsongs("");
+        setTopartists("");
+    }
+
     // Fetch necessary user info
-    fetchData(token, { setUsername, setPfp, setId });
+    fetchData();
+
+    // Post user's top 5 songs
+    postTop();
 
     return (
         <div className = "Home">
