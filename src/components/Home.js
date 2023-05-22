@@ -5,8 +5,19 @@ import { useEffect, useState } from "react";
 // Import components
 import LogoutButton from "./LogoutButton";
 
+async function fetchProfile(token, props) {
+    const result = await fetch("https://api.spotify.com/v1/me", {
+        method: "GET", headers: { Authorization: `Bearer ${token}` }
+    });
+    const profile = await result.json();
+    props.setUsername(profile.display_name);
+    props.setPfp(profile.images[0].url);
+}
+
 const Home = () => {
     const [token, setToken] = useState("");
+    const [username, setUsername] = useState("");
+    const [pfp, setPfp] = useState("");
 
     useEffect(() => {
         const hash = window.location.hash;
@@ -20,17 +31,17 @@ const Home = () => {
         setToken(token);
     }, [token]);
 
+    fetchProfile(token, {setUsername, setPfp});
+
     return (
         <div className = "Home">
             <header className = "Home-header">
+                <img src = {pfp} alt = "Profile Picture" />
                 <p>
-                    This is current home page
+                    username: { username }
                 </p>
                 <p>
-                    Will show info here once you're logged in!
-                </p>
-                <p>
-                    token: { token }
+                    more info soon
                 </p>
                 <div>
                     <LogoutButton setToken = {setToken} />
