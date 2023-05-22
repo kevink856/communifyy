@@ -1,9 +1,14 @@
 // Import dependencies
 import "../styles/Home.css";
+import db from "../db/conn.mjs";
+import express from "express";
 import { useEffect, useState } from "react";
 
 // Import components
 import LogoutButton from "./LogoutButton";
+
+// Declare const for REST API
+const router = express.Router();
 
 /* 
  * Asynchronously fetch API call
@@ -16,6 +21,14 @@ async function fetchData(token, props) {
     const profile = await result.json();
     props.setUsername(profile.display_name);
     props.setPfp(profile.images[0].url);
+    props.setId(profile.id);
+}
+
+/* 
+ * Take user's information and POST to database
+ */
+function postData(props) {
+
 }
 
 /*
@@ -25,6 +38,7 @@ const Home = () => {
     const [token, setToken] = useState("");
     const [username, setUsername] = useState("");
     const [pfp, setPfp] = useState("");
+    const [id, setId] = useState("");
 
     // Run and parse token from URL whenever "token" changes
     useEffect(() => {
@@ -39,7 +53,11 @@ const Home = () => {
         setToken(token);
     }, [token]);
 
-    fetchData(token, {setUsername, setPfp});
+    // Fetch necessary user info
+    fetchData(token, { setUsername, setPfp, setId });
+    
+    // Store user info into database
+    postData({ id, username });
 
     return (
         <div className = "Home">
