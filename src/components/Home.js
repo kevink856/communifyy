@@ -1,6 +1,6 @@
 // Import dependencies
 import "../styles/Home.css";
-import db from "../db/conn.mjs";
+import db from "../server/db/connect.js";
 import express from "express";
 import { useEffect, useState } from "react";
 
@@ -22,13 +22,6 @@ async function fetchData(token, props) {
     props.setUsername(profile.display_name);
     props.setPfp(profile.images[0].url);
     props.setId(profile.id);
-}
-
-/* 
- * Take user's information and POST to database
- */
-function postData(props) {
-
 }
 
 /*
