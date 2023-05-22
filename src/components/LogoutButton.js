@@ -2,6 +2,9 @@
 import "../styles/LogButton.css"
 import { Link } from "react-router-dom";
 
+/*
+ * Component to logout by clearing token instances and redirecting to landing page
+ */
 const Logout = (prop) => {
     return (
         <Link to = "/">

@@ -5,7 +5,11 @@ import { useEffect, useState } from "react";
 // Import components
 import LogoutButton from "./LogoutButton";
 
-async function fetchProfile(token, props) {
+/* 
+ * Asynchronously fetch API call
+ * - Gets user's profile data
+ */ 
+async function fetchData(token, props) {
     const result = await fetch("https://api.spotify.com/v1/me", {
         method: "GET", headers: { Authorization: `Bearer ${token}` }
     });
@@ -14,11 +18,15 @@ async function fetchProfile(token, props) {
     props.setPfp(profile.images[0].url);
 }
 
+/*
+ * Component that holds entire single-page application
+ */
 const Home = () => {
     const [token, setToken] = useState("");
     const [username, setUsername] = useState("");
     const [pfp, setPfp] = useState("");
 
+    // Run and parse token from URL whenever "token" changes
     useEffect(() => {
         const hash = window.location.hash;
         let token = window.localStorage.getItem("token");
@@ -31,12 +39,12 @@ const Home = () => {
         setToken(token);
     }, [token]);
 
-    fetchProfile(token, {setUsername, setPfp});
+    fetchData(token, {setUsername, setPfp});
 
     return (
         <div className = "Home">
             <header className = "Home-header">
-                <img src = {pfp} alt = "Profile Picture" />
+                <img src = {pfp} alt = "Profile" />
                 <p>
                     username: { username }
                 </p>

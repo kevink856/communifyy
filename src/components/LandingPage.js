@@ -4,6 +4,9 @@ import "../styles/LandingPage.css";
 // Import components
 import LoginButton from "./LoginButton";
 
+/*
+ * Front Component that shows intro and login button
+ */
 const LandingPage = () => {
     return (
         <div className = "LandingPage">
