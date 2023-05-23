@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import top from "./routes/top.js";
+import top from "./routes/top.mjs";
 import "express-async-errors";
 
 const PORT = process.env.REACT_APP_PORT || 3000;
