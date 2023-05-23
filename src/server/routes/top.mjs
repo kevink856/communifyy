@@ -10,3 +10,5 @@ router.post("/", async (req, res) => {
     let result = await collection.insertOne(newDocument);
     res.send(result).status(204);
 });
+
+export default router;
