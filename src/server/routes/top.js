@@ -1,7 +1,13 @@
-import express from "express";
-import db from "../db/connect.mjs";
+// Import dependencies
+const express = require("express");
+const db = require("../db/connect.js");
 
 const router = express.Router();
+
+// Test get
+router.get("/", async (req, res) => {
+    res.send("Hello world!");
+});
 
 // Add a new user's top songs / artists data to the collection
 router.post("/", async (req, res) => {
@@ -11,4 +17,4 @@ router.post("/", async (req, res) => {
     res.send(result).status(204);
 });
 
-export default router;
+module.exports = router;

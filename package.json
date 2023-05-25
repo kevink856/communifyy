@@ -29,7 +29,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dev": "nodemon --experimental-modules index.mjs"
+    "dev": "claudia create --version dev --region us-east-1 --api-module api",
+    "prod": "claudia set-version --version production"
   },
   "eslintConfig": {
     "extends": [
@@ -50,6 +51,7 @@
     ]
   },
   "devDependencies": {
+    "claudia": "^5.14.1",
     "gh-pages": "^5.0.0"
   }
 }
