@@ -2,19 +2,18 @@
 require("dotenv").config()
 const { MongoClient } = require("mongodb");
 
-const uri = process.env.REACT_APP_DB_URI;
-const client = new MongoClient(uri);
+const client = new MongoClient(process.env.REACT_APP_DB_URI);
 
-let conn;
+let conn, db;
+
 async function run() {
     try {
         conn = await client.connect();
+        db = conn.db("communify");
     } catch(e) {
         console.error(e);
     }
 }
-run().catch(console.dir);
-
-const db = conn.db("communifyy");
+run();
 
 module.exports = db;

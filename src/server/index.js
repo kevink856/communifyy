@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const top = require("./routes/top.js");
 require("express-async-errors");
+require("dotenv").config();
 
 const app = express();
 
