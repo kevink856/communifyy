@@ -44,7 +44,7 @@ const Home = () => {
     }
 
     const postTop = async () => {
-        await fetch(`${process.env.REACT_APP_BASE_URL}/topsongs`, {
+        await fetch(`${process.env.REACT_APP_BASE_URL}/top`, {
             method: "POST",
             headers: {
                 "content-type": "application/json"
