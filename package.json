@@ -4,19 +4,14 @@
   "homepage": "https://kevink856.github.io/communifyy",
   "private": true,
   "dependencies": {
-    "@emotion/react": "^11.11.0",
-    "@emotion/styled": "^11.11.0",
-    "@mui/material": "^5.13.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "aws-serverless-express": "^3.4.0",
     "cors": "^2.8.5",
-    "curl": "^0.1.4",
     "express": "^4.18.2",
     "express-async-errors": "^3.1.1",
     "mongodb": "^5.5.0",
-    "nodemon": "^2.0.22",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.11.2",
@@ -30,7 +25,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dev": "claudia create --version dev --region us-east-1 --api-module api",
+    "dev": "claudia create --version dev --region us-west-1 --deploy-proxy-api --handler lambda.handler --use-s3-bucket communifyy-bucket",
     "prod": "claudia set-version --version production"
   },
   "eslintConfig": {
