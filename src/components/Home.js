@@ -29,11 +29,8 @@ const Home = () => {
         setToken(token);
     }, [token]);
 
-    /* 
-     * Asynchronously fetch API call
-     * - Gets user's profile data
-     */ 
     const fetchData = async () => {
+        // Gets user's profile data
         const result = await fetch("https://api.spotify.com/v1/me", {
             method: "GET", headers: { Authorization: `Bearer ${token}` }
         });
@@ -41,6 +38,12 @@ const Home = () => {
         setUsername(profile.display_name);
         setPfp(profile.images[0].url);
         setId(profile.id);
+
+        // Gets user's top songs and artists
+        result = await fetch("https://api.spotify.com/v1/me/top", {
+            method: "GET", headers: { Authorization: `Bearer ${token}` }
+        });
+        const top = await result.json();
     }
 
     const postTop = async () => {
