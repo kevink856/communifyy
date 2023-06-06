@@ -12,7 +12,6 @@ const Logout = (prop) => {
                 type = "button"
                 onClick = {() => {
                     prop.setToken("");
-                    window.localStorage.removeItem("token");
                 }}
             > Logout
             </button>
