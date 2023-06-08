@@ -90,7 +90,7 @@ const Home = () => {
                     "content-type": "application/json"
                 },
                 body: JSON.stringify({
-                    user_id,
+                    _id: user_id,
                     top_songs: top_songs,
                     top_artists: top_artists
                 })
