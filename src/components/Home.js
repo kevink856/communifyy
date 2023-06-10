@@ -5,6 +5,7 @@ import DefaultPfp from "../data/no_profile.webp";
 
 // Import components
 import LogoutButton from "./LogoutButton";
+import LoadingPage from "./LoadingPage";
 
 // Control data size
 const TOP_SIZE = 50;
@@ -15,7 +16,6 @@ const MAX_ARTISTS_PER_SONG = 4;
  */
 const Home = () => {
     const [token, setToken] = useState("");
-    const [username, setUsername] = useState("");
     const [pfp, setPfp] = useState("");
     const [user_id, setUser_id] = useState("");
     const [top_songs, setTop_songs] = useState([]);
@@ -39,7 +39,6 @@ const Home = () => {
                 .then((response) => response.json());
 
             //Structure user's profile data
-            setUsername(result_profile.display_name);
             setUser_id(result_profile.id);
             result_profile.images.length > 0 ? setPfp(result_profile.images[0].url) : setPfp(DefaultPfp);
         }
@@ -66,7 +65,7 @@ const Home = () => {
                     popularity: result_top_songs.items[i].popularity,
                     image: result_top_songs.items[i].album.images[0].url,
                     artists: arr_artists
-                });
+                }, null, "\t");
             }
             setTop_songs(arr_songs); 
 
@@ -78,9 +77,9 @@ const Home = () => {
                     popularity: result_top_artists.items[i].popularity,
                     image: result_top_artists.items[i].images[0].url,
                     genres: result_top_artists.items[i].genres
-                });
+                }, null, "\t");
             }
-            setTop_artists(arr_artists); 
+            setTop_artists(arr_artists);
         };
         
         fetchData();
@@ -107,7 +106,8 @@ const Home = () => {
         }
     }, [top_artists]);
 
-    return (
+    // Return loading page until top_artists is not null
+    return top_artists.length > 0 ? (
         <div className = "Home">
             <ul>
                 <li><img style = {{ width: 60, height: 60, paddingLeft: "30px" }} src = { pfp } alt = "" /></li>
@@ -115,17 +115,59 @@ const Home = () => {
             </ul>
             <header className = "Home-header">
                 <p>
-                    { username }'s Top 5 Artists
+                    Your Top 5 Artists
                 </p>
+                <div className = "Home-body">
+                    <div className = "Home-artists">
+                        <img style = {{ width: 200, height: 200 }} src = { JSON.parse(top_artists[0]).image } alt = "" />
+                        <p>{ JSON.parse(top_artists[0]).name }</p>
+                    </div>
+                    <div className = "Home-artists">
+                        <img style = {{ width: 200, height: 200 }} src = { JSON.parse(top_artists[1]).image } alt = "" />
+                        <p>{ JSON.parse(top_artists[1]).name }</p>
+                    </div>
+                    <div className = "Home-artists">
+                        <img style = {{ width: 200, height: 200 }} src = { JSON.parse(top_artists[2]).image } alt = "" />
+                        <p>{ JSON.parse(top_artists[2]).name }</p>
+                    </div>
+                    <div className = "Home-artists">
+                        <img style = {{ width: 200, height: 200 }} src = { JSON.parse(top_artists[3]).image } alt = "" />
+                        <p>{ JSON.parse(top_artists[3]).name }</p>
+                    </div>
+                    <div className = "Home-artists">
+                        <img style = {{ width: 200, height: 200 }} src = { JSON.parse(top_artists[4]).image } alt = "" />
+                        <p>{ JSON.parse(top_artists[4]).name }</p>
+                    </div>
+                </div>
+                <p style = {{ height: "100px" }}></p>
                 <p>
-                    ...
+                    Your Top 5 Songs
                 </p>
-                <div>
-                    
+                <div className = "Home-body">
+                    <div className = "Home-songs">
+                        <img style = {{ width: 200, height: 200 }} src = { JSON.parse(top_songs[0]).image } alt = "" />
+                        <p>{ JSON.parse(top_songs[0]).name }</p>
+                    </div>
+                    <div className = "Home-songs">
+                        <img style = {{ width: 200, height: 200 }} src = { JSON.parse(top_songs[1]).image } alt = "" />
+                        <p>{ JSON.parse(top_songs[1]).name }</p>
+                    </div>
+                    <div className = "Home-songs">
+                        <img style = {{ width: 200, height: 200 }} src = { JSON.parse(top_songs[2]).image } alt = "" />
+                        <p>{ JSON.parse(top_songs[2]).name }</p>
+                    </div>
+                    <div className = "Home-songs">
+                        <img style = {{ width: 200, height: 200 }} src = { JSON.parse(top_songs[3]).image } alt = "" />
+                        <p>{ JSON.parse(top_songs[3]).name }</p>
+                    </div>
+                    <div className = "Home-songs">
+                        <img style = {{ width: 200, height: 200 }} src = { JSON.parse(top_songs[4]).image } alt = "" />
+                        <p>{ JSON.parse(top_songs[4]).name }</p>
+                    </div>
                 </div>
             </header>
         </div>
-    );
+    ) : <LoadingPage />;
 }
 
 export default Home;

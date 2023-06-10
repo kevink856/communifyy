@@ -5,14 +5,38 @@
 
 .Home-header {
     align-items: center;
-    background-color: #19e68c;
     color: #030a01;
+    margin-top: 80px;
     display: flex;
     flex-direction: column;
-    font-size: calc(20px + 2vmin);
+    font-size: calc(30px + 2vmin);
     font-weight: bold;
     justify-content: center;
     min-height: 100vh;
+}
+
+.Home-body {
+    display: flex;
+    align-items: center;
+    font-size: calc(20px + 2vmin);
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 50px;
+}
+
+.Home-artists {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.Home-songs {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
 }
 
 ul {
