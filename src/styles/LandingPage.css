@@ -1,19 +1,35 @@
 .LandingPage {
     text-align: center;
+    background-color: #19e68c;
 }
 
 .LandingPage-header {
     align-items: center;
-    background-color: #282c34;
-    color: rgb(209, 209, 209);
+    background-color: #19e68c;
+    color: #030a01;
     display: flex;
     flex-direction: column;
-    font-size: calc(10px + 2vmin);
+    font-size: calc(20px + 2vmin);
     font-weight: bold;
     justify-content: center;
     min-height: 100vh;
 }
 
 .LandingPage-title {
-    font-size: calc(30px + 2vmin);
+    font-size: calc(40px + 2vmin);
+}
+
+ul {
+    display: flex;
+    list-style-type: none;
+    position: fixed;
+    top: 0;
+    height: 80px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #030a01;
+    align-items: center;
+    justify-content: space-between;
 }

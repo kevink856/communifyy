@@ -15,7 +15,7 @@ const LoginButton = () => {
         <button className = "Log-button"
             type = "button"
             onClick = {() => {
-                window.location.href = `${AUTH_ENDPOINT}?response_type=${RESPONSE_TYPE}&client_id=${process.env.REACT_APP_CLIENT_ID}&scope=${SCOPE}&redirect_uri=${REDIRECT_URI}`;
+                window.location.href = `${ AUTH_ENDPOINT }?response_type=${ RESPONSE_TYPE }&client_id=${ process.env.REACT_APP_CLIENT_ID }&scope=${ SCOPE }&redirect_uri=${ REDIRECT_URI }`;
             }}
         > Login to Spotify
         </button>

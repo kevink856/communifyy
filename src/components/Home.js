@@ -1,6 +1,7 @@
 // Import dependencies
 import "../styles/Home.css";
 import { useEffect, useState } from "react";
+import DefaultPfp from "../data/no_profile.webp";
 
 // Import components
 import LogoutButton from "./LogoutButton";
@@ -46,9 +47,7 @@ const Home = () => {
             //Structure user's profile data
             setUsername(result_profile.display_name);
             setUser_id(result_profile.id);
-            if(result_profile.images.length > 0) {
-                setPfp(result_profile.images[0].url);
-            }
+            result_profile.images.length > 0 ? setPfp(result_profile.images[0].url) : setPfp(DefaultPfp);
     
             // Structure user's top songs data
             let arr_songs = new Array(TOP_SIZE);
@@ -103,16 +102,19 @@ const Home = () => {
 
     return (
         <div className = "Home">
+            <ul>
+                <li><img style = {{ width: 60, height: 60, paddingLeft: "30px" }} src = { pfp } alt = "" /></li>
+                <li style = {{ paddingRight: "30px" }}><LogoutButton setToken = { setToken } /></li>
+            </ul>
             <header className = "Home-header">
-                <img src = {pfp} onerror = "this.src = ../data/no_profile.webp" alt = "Profile" />
                 <p>
-                    username: { username }
+                    { username }'s Top 5 Artists
                 </p>
                 <p>
-                    more info soon
+                    ...
                 </p>
                 <div>
-                    <LogoutButton setToken = {setToken} />
+                    
                 </div>
             </header>
         </div>
