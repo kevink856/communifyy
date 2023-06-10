@@ -5,13 +5,13 @@ import { Link } from "react-router-dom";
 /*
  * Component to logout by clearing token instances and redirecting to landing page
  */
-const Logout = (prop) => {
+const Logout = () => {
     return (
         <Link to = "/" style = {{ textDecoration: "none" }}>
             <button className = "Log-button"
                 type = "button"
                 onClick = {() => {
-                    prop.setToken("");
+                    window.localStorage.removeItem("token");
                 }}
             > Logout
             </button>
