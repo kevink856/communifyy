@@ -31,11 +31,29 @@
     justify-content: center;
 }
 
+.Home-artist-data {
+    display: flex;
+    align-items: center;
+    font-size: calc(15px + 2vmin);
+    flex-direction: column;
+    justify-content: center;
+    font-weight: normal;
+}
+
 .Home-songs {
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: center;
+}
+
+.Home-song-data {
+    display: flex;
+    align-items: center;
+    font-size: calc(15px + 2vmin);
+    flex-direction: column;
+    justify-content: center;
+    font-weight: normal;
 }
 
 ul {

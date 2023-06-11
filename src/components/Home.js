@@ -10,6 +10,7 @@ import LoadingPage from "./LoadingPage";
 // Control data size
 const TOP_SIZE = 50;
 const MAX_ARTISTS_PER_SONG = 4;
+const MAX_GENRE_COUNT = 5;
 
 /*
  * Component that holds entire single-page application
@@ -22,6 +23,9 @@ const Home = () => {
     const [artist_pop, setArtist_pop] = useState(0);
     const [top_songs, setTop_songs] = useState([]);
     const [top_artists, setTop_artists] = useState([]);
+    const [top_genres, setTop_genres] = useState([]);
+    const [artist_count, setArtist_count] = useState(0);
+    const [song_count, setSong_count] = useState(0);
 
     // Run and parse token from URL whenever "token" changes
     useEffect(() => {
@@ -60,16 +64,17 @@ const Home = () => {
             let temp_song_pop = 0;
             for(let i=0; i<arr_songs.length && i<result_top_songs.items.length; i++) {
                 let arr_artists = new Array(MAX_ARTISTS_PER_SONG);
-                for(let j=0; j<result_top_songs.items[i].artists.length && j<arr_artists.length; j++) {
-                    arr_artists[j] = result_top_songs.items[i].artists[j].name;
+                const song = result_top_songs.items[i];
+                for(let j=0; j<song.artists.length && j<arr_artists.length; j++) {
+                    arr_artists[j] = song.artists[j].name;
                 }
                 arr_songs[i] = JSON.stringify({
-                    name: result_top_songs.items[i].name,
-                    popularity: result_top_songs.items[i].popularity,
-                    image: result_top_songs.items[i].album.images[0].url,
+                    name: song.name,
+                    popularity: song.popularity,
+                    image: song.album.images[0].url,
                     artists: arr_artists
                 }, null, "\t");
-                temp_song_pop += result_top_songs.items[i].popularity;
+                temp_song_pop += song.popularity;
             }
             setTop_songs(arr_songs); 
             setSong_pop(temp_song_pop / TOP_SIZE);
@@ -77,17 +82,32 @@ const Home = () => {
             // Structure user's top artists data
             let arr_artists = new Array(TOP_SIZE);
             let temp_artist_pop = 0;
+            const genre_count = new Map();
             for(let i=0; i<arr_artists.length && i<result_top_artists.items.length; i++) {
+                const artist = result_top_artists.items[i];
                 arr_artists[i] = JSON.stringify({
-                    name: result_top_artists.items[i].name,
-                    popularity: result_top_artists.items[i].popularity,
-                    image: result_top_artists.items[i].images[0].url,
-                    genres: result_top_artists.items[i].genres
+                    name: artist.name,
+                    popularity: artist.popularity,
+                    image: artist.images[0].url,
+                    genres: artist.genres
                 }, null, "\t");
-                temp_artist_pop += result_top_artists.items[i].popularity;
+                artist.genres.forEach((genre) => {
+                    genre_count.get(genre) ? genre_count.set(genre, genre_count.get(genre)+1) : genre_count.set(genre, 1);
+                });
+                temp_artist_pop += artist.popularity;
             }
             setTop_artists(arr_artists);
             setArtist_pop(temp_artist_pop / TOP_SIZE);
+
+            const top_genres_arr = new Array(MAX_GENRE_COUNT);
+            const genres_sorted = new Map([...genre_count].sort((a, b) => {
+                return b[1] - a[1];
+            }));
+            const iterator = genres_sorted.keys();
+            for(let i=0; i<top_genres_arr.length; i++) {
+                top_genres_arr[i] = iterator.next().value;
+            }
+            setTop_genres(top_genres_arr);
         }
         
         fetchData();
@@ -104,9 +124,7 @@ const Home = () => {
                 },
                 body: JSON.stringify({
                     _id: user_id,
-                    song_pop: song_pop,
                     top_songs: top_songs,
-                    artist_pop: artist_pop,
                     top_artists: top_artists
                 })
             }).then(resp => resp.json());
@@ -130,6 +148,18 @@ const Home = () => {
         return container;
     }
 
+    const loadArtistData = () => {
+        const container = [];
+        const artist = JSON.parse(top_artists[0]);
+        container.push(
+            <div className = "Home-artist-data">
+                <p>Your top artists are { artist_pop }% popular</p>
+                <p>{ artist_count } other users also have { artist.name } in their Top 5 Artists</p>
+            </div>
+        );
+        return container;
+    }
+
     const loadSongs = () => {
         const container = [];
         for(let i=0; i<5; i++) {
@@ -141,6 +171,19 @@ const Home = () => {
                 </div>
             );
         }
+        return container;
+    }
+
+    const loadSongData = () => {
+        const container = [];
+        const song = JSON.parse(top_songs[0]);
+        container.push(
+            <div className = "Home-song-data">
+                <p>Your top genres are: { top_genres[0] }, { top_genres[1] }, and { top_genres[2] }</p>
+                <p>Your top artists are { song_pop }% popular</p>
+                <p>{ song_count } other users also have { song.name } in their Top 5 Songs</p>
+            </div>
+        );
         return container;
     }
 
@@ -158,6 +201,7 @@ const Home = () => {
                 <div className = "Home-body">
                     { loadArtists() }
                 </div>
+                { loadArtistData() }
             </header>
             <p style = {{ height: "100px" }}></p>
             <header className = "Home-header">
@@ -167,6 +211,7 @@ const Home = () => {
                 <div className = "Home-body">
                     { loadSongs() }
                 </div>
+                { loadSongData() }
             </header>
         </div>
     ) : <LoadingPage />;
