@@ -6,7 +6,6 @@
 .Home-header {
     align-items: center;
     color: #030a01;
-    margin-top: 80px;
     display: flex;
     flex-direction: column;
     font-size: calc(30px + 2vmin);
