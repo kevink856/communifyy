@@ -6,6 +6,8 @@ import DefaultPfp from "../data/no_profile.webp";
 // Import components
 import LogoutButton from "./LogoutButton";
 import LoadingPage from "./LoadingPage";
+import LeftSlider from "./LeftSlider";
+import RightSlider from "./RightSlider";
 
 // Control data size
 const TOP_SIZE = 50;
@@ -26,6 +28,8 @@ const Home = () => {
     const [top_genres, setTop_genres] = useState([]);
     const [artist_count, setArtist_count] = useState(0);
     const [song_count, setSong_count] = useState(0);
+    const [artist_slider, setArtist_slider] = useState(0);
+    const [song_slider, setSong_slider] = useState(0);
 
     // Run and parse token from URL whenever "token" changes
     useEffect(() => {
@@ -135,24 +139,24 @@ const Home = () => {
     }, [top_artists]);
 
     const loadArtists = () => {
-        const container = [];
-        for(let i=0; i<5; i++) {
-            const artist = JSON.parse(top_artists[i]);
-            container.push(
+        const artist = JSON.parse(top_artists[artist_slider]);
+        return (
+            <div className = "Home-body">
+                <LeftSlider slider = {artist_slider} setSlider = {setArtist_slider} />
                 <div className = "Home-artists">
-                    <img style = {{ width: 200, height: 200 }} src = { artist.image } alt = "" />
-                    <p>{ artist.name }</p>
+                    <img style = {{ width: 250, height: 250 }} src = { artist.image } alt = "" />
                 </div>
-            );
-        }
-        return container;
+                <RightSlider slider = {artist_slider} setSlider = {setArtist_slider} />
+            </div>
+        );
     }
 
     const loadArtistData = () => {
         const container = [];
-        const artist = JSON.parse(top_artists[0]);
+        const artist = JSON.parse(top_artists[artist_slider]);
         container.push(
             <div className = "Home-artist-data">
+                <p style = {{ fontWeight: "bold" }}>{ artist.name }</p>
                 <p>Your top artists are { artist_pop }% popular</p>
                 <p>{ artist_count } other users also have { artist.name } in their Top 5 Artists</p>
             </div>
@@ -161,24 +165,24 @@ const Home = () => {
     }
 
     const loadSongs = () => {
-        const container = [];
-        for(let i=0; i<5; i++) {
-            const song = JSON.parse(top_songs[i]);
-            container.push(
+        const song = JSON.parse(top_songs[song_slider]);
+        return (
+            <div className = "Home-body">
+                <LeftSlider slider = {song_slider} setSlider = {setSong_slider} />
                 <div className = "Home-songs">
-                    <img style = {{ width: 200, height: 200 }} src = { song.image } alt = "" />
-                    <p>{ song.name }</p>
+                    <img style = {{ width: 250, height: 250 }} src = { song.image } alt = "" />
                 </div>
-            );
-        }
-        return container;
+                <RightSlider slider = {song_slider} setSlider = {setSong_slider} />
+            </div>
+        );
     }
 
     const loadSongData = () => {
         const container = [];
-        const song = JSON.parse(top_songs[0]);
+        const song = JSON.parse(top_songs[song_slider]);
         container.push(
             <div className = "Home-song-data">
+                <p style = {{ fontWeight: "bold" }}>{ song.name }</p>
                 <p>Your top genres are: { top_genres[0] }, { top_genres[1] }, and { top_genres[2] }</p>
                 <p>Your top artists are { song_pop }% popular</p>
                 <p>{ song_count } other users also have { song.name } in their Top 5 Songs</p>
@@ -195,22 +199,14 @@ const Home = () => {
                 <li style = {{ paddingRight: "30px" }}><LogoutButton /></li>
             </ul>
             <header className = "Home-header" style = {{ marginTop: "80px" }}>
-                <p>
-                    Your Top 5 Artists
-                </p>
-                <div className = "Home-body">
-                    { loadArtists() }
-                </div>
+                <p>Your Top 5 Artists<br />#{ artist_slider+1 }:</p>
+                { loadArtists() }
                 { loadArtistData() }
             </header>
             <p style = {{ height: "100px" }}></p>
             <header className = "Home-header">
-                <p>
-                    Your Top 5 Songs
-                </p>
-                <div className = "Home-body">
-                    { loadSongs() }
-                </div>
+                <p>Your Top 5 Songs<br />#{ song_slider+1 }:</p>
+                { loadSongs() }
                 { loadSongData() }
             </header>
         </div>

@@ -19,9 +19,8 @@
     align-items: center;
     font-size: calc(20px + 2vmin);
     flex-direction: row;
-    flex-wrap: wrap;
+    column-gap: 0px;
     justify-content: center;
-    gap: 50px;
 }
 
 .Home-artists {
